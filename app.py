@@ -11,5 +11,5 @@ def hello_world():
 
 
 if __name__ == "__main__":
-    load_dotenv()
-    print(os.environ['TUMAMA'])
+    app.run()
+
