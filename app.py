@@ -39,15 +39,29 @@ def post_purchase():
         return Response('Purchase Successful!',201)
         
 
-@app.route("/reviews", methods=['GET'])
+@app.route("/reviews", methods=['GET', 'POST'])
 def get_product_reviews():
-    query = '''
-            SELECT cms_id AS course_cms_id, AVG(review_score) AS review_score
-            FROM reviews
-            GROUP BY (cms_id);
-            '''
-    result = execute_query(query)
-    return json.dumps(result)
+    if request.method == 'GET':
+        query = '''
+                SELECT cms_id AS course_cms_id, AVG(review_score) AS review_score
+                FROM reviews
+                GROUP BY (cms_id);
+                '''
+        result = execute_query(query)
+        return json.dumps(result)
+    elif request.method == 'POST':
+        query = '''
+                INSERT INTO reviews (cms_id, user_token, review_score)
+                VALUES (%s, %s, %s)
+                '''
+        json_body = request.get_json()
+
+        vars = (json_body['cms_id'],json_body['user_token'], json_body['review_score'])
+
+        execute_query_commit(query, vars)
+
+        return Response("Review successful", 201)
+
 
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0' )
