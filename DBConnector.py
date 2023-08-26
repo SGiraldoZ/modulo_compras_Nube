@@ -22,7 +22,7 @@ def connect():
 
     return conn
 
-def execute_query(query, vars):
+def execute_query(query, vars=None):
     conn = connect()
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
     cur.execute(query, vars=vars)
