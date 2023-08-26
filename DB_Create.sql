@@ -1,6 +1,6 @@
 CREATE DATABASE UDemy;
 
-USE UDemy;
+\c UDemy;
 
 CREATE TABLE Users (
     u_id SERIAL NOT NULL UNIQUE,
@@ -19,6 +19,8 @@ CREATE TABLE Courses (
 CREATE TABLE Purchases (
     u_id INT NOT NULL UNIQUE,
     course_id INT NOT NULL UNIQUE,
+    price FLOAT,
+    purchase_date DATE,
     CONSTRAINT Purchase_pk PRIMARY KEY (u_id, course_id),
     CONSTRAINT purchase_user_fk FOREIGN KEY (u_id) REFERENCES Users (u_id),
     CONSTRAINT purchase_course_fk FOREIGN KEY (course_id) REFERENCES Courses (course_id)
