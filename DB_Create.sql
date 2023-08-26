@@ -9,3 +9,12 @@ CREATE TABLE Purchases (
     purchase_date DATE,
     CONSTRAINT Purchase_pk PRIMARY KEY (user_token, course_cms_id)
 );
+
+CREATE TABLE Reviews(
+    cms_id VARCHAR NOT NULL,
+    user_token VARCHAR NOT NULL,
+    review_score FLOAT,
+    Reviews_text VARCHAR,
+    CONSTRAINT review_pk PRIMARY KEY(user_token, cms_id)
+    
+);
