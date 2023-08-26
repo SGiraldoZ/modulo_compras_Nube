@@ -33,6 +33,18 @@ def execute_query(query, vars):
     conn.close()
     return rows
 
+def execute_query_commit(query, vars):
+    conn = connect()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cur.execute(query, vars=vars)
+
+    # Fetch the results.
+    rows = cur.fetchall()
+    
+    conn.commit()
+    conn.close()
+    
+
 
 # print(execute_query("SELECT * FROM COURSES WHERE course_id = %s", (1,)).dict())
 
