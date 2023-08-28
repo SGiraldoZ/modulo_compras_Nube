@@ -16,7 +16,7 @@ def hello_world():
 def customer_purchases(user_id):
     if request.method == 'GET':
         query = '''
-                SELECT * FROM Purchases WHERE user_token = %s;
+                SELECT user_token, course_cms_id FROM Purchases WHERE user_token = %s;
                 '''
         vars = (user_id,)
         result = execute_query(query, vars)
