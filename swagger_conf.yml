@@ -1,0 +1,110 @@
+swagger: "2.0"
+info:
+  title: "Course Purchase and Review API"
+  description: "API for managing customer purchases and reviews for courses"
+  version: "1.0.0"
+basePath: "/"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /:
+    get:
+      tags:
+        - "Root"
+      summary: "Root route to say hello"
+      responses:
+        200:
+          description: "Successful response"
+  /customer/{user_id}/purchases:
+    get:
+      tags:
+        - "Customer"
+      summary: "Get purchases for a customer"
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          type: string
+          description: "User ID"
+      responses:
+        200:
+          description: "Successful response"
+  /customer/{user_id}/reviews:
+    get:
+      tags:
+        - "Customer"
+      summary: "Get reviews for a customer"
+      parameters:
+        - in: path
+          name: user_id
+          required: true
+          type: string
+          description: "User ID"
+      responses:
+        200:
+          description: "Successful response"
+  /purchases:
+    post:
+      tags:
+        - "Purchase"
+      summary: "Create a new purchase"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: purchase
+          schema:
+            type: object
+            properties:
+              user_token:
+                type: string
+                example: "user123"
+              course_id:
+                type: string
+                example: "course456"
+              purchase_price:
+                type: number
+                example: 29.99
+          required: true
+          description: "Purchase information"
+      responses:
+        201:
+          description: "Purchase successful"
+  /reviews:
+    get:
+      tags:
+        - "Review"
+      summary: "Get average review scores for courses"
+      responses:
+        200:
+          description: "Successful response"
+    post:
+      tags:
+        - "Review"
+      summary: "Post a new review"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: review
+          schema:
+            type: object
+            properties:
+              cms_id:
+                type: string
+                example: "course123"
+              user_token:
+                type: string
+                example: "user123"
+              review_score:
+                type: number
+                example: 4.5
+          required: true
+          description: "Review information"
+      responses:
+        201:
+          description: "Review successful"
