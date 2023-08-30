@@ -30,6 +30,7 @@ def customer_purchases(user_id):
         resp = make_response(json.dumps(result))
         resp.headers.add('Access-Control-Allow-Headers', '*')
         resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.headers.add('Access-Control-Allow-Methods', '*')
 
         return resp
     
@@ -46,6 +47,7 @@ def customer_reviews(user_id):
         resp = make_response(json.dumps(result))
         resp.headers.add('Access-Control-Allow-Headers', '*')
         resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.headers.add('Access-Control-Allow-Methods', '*')
 
         return resp
 
@@ -66,6 +68,7 @@ def post_purchase():
         resp = Response("Purchase successful", 201)
         resp.headers.add('Access-Control-Allow-Headers', '*')
         resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.headers.add('Access-Control-Allow-Methods', '*')
         return resp
         
 
@@ -82,6 +85,7 @@ def get_product_reviews():
         resp = make_response(json.dumps(result))
         resp.headers.add('Access-Control-Allow-Headers', '*')
         resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.headers.add('Access-Control-Allow-Methods', '*')
 
         return resp
     
@@ -100,6 +104,7 @@ def get_product_reviews():
         resp = Response("Review successful", 201)
         resp.headers.add('Access-Control-Allow-Headers', '*')
         resp.headers.add('Access-Control-Allow-Origin', '*')
+        resp.headers.add('Access-Control-Allow-Methods', '*')
         return resp
 
 
