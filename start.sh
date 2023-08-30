@@ -6,4 +6,4 @@ docker run -d -p 56733:80 \
   -v $PWD:/app ${app}
 
 
-  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu$(lsb_release -cs)/stable" 
+  sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu$(lsb_release -cs)/stable"
