@@ -1,12 +1,16 @@
-from flask import Flask, request, redirect, Response
+from flask import Flask, request, redirect, Response, make_response
 import flask
 from dotenv import load_dotenv
 import os
 from DBConnector import execute_query, execute_query_commit
 import json
 from datetime import datetime
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+
+app.config['CORS_SUPPORTS_CREDENTIALS'] = True
+CORS(app)
 
 @app.route("/")
 def hello_world():
@@ -21,7 +25,10 @@ def customer_purchases(user_id):
         vars = (user_id,)
         result = execute_query(query, vars)
 
-        return json.dumps(result)
+        resp = make_response(json.dumps(result))
+        resp.headers.add('Access-Control-Allow-Headers', '*')
+
+        return resp
     
 @app.route("/customer/<user_id>/reviews", methods=['GET'])
 def customer_reviews(user_id):
