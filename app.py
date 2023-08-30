@@ -9,14 +9,16 @@ from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
 
-# app.config['CORS_SUPPORTS_CREDENTIALS'] = True
+app.config['CORS_SUPPORTS_CREDENTIALS'] = True
 CORS(app)
 
 @app.route("/")
+@cross_origin(supports_credentials=True)
 def hello_world():
     return "<h1> Hello World </h1>"
 
 @app.route("/customer/<user_id>/purchases", methods=['GET'])
+@cross_origin(supports_credentials=True)
 def customer_purchases(user_id):
     if request.method == 'GET':
         query = '''
@@ -31,6 +33,7 @@ def customer_purchases(user_id):
         return resp
     
 @app.route("/customer/<user_id>/reviews", methods=['GET'])
+@cross_origin(supports_credentials=True)
 def customer_reviews(user_id):
     if request.method == 'GET':
         query = '''
@@ -39,10 +42,14 @@ def customer_reviews(user_id):
         vars = (user_id,)
         result = execute_query(query, vars)
 
-        return json.dumps(result)
+        resp = make_response(json.dumps(result))
+        resp.headers.add('Access-Control-Allow-Headers', '*')
+
+        return resp
 
 
 @app.route('/purchases', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def post_purchase():
     if request.method == 'POST':
         query = '''
@@ -54,10 +61,13 @@ def post_purchase():
         vars = (json_body['user_token'], json_body['course_id'], json_body['purchase_price'], p_date)
         execute_query_commit(query, vars)
 
-        return Response('Purchase Successful!',201)
+        resp = Response("Purchase successful", 201)
+        resp.headers.add('Access-Control-Allow-Headers', '*')
+        return resp
         
 
 @app.route("/reviews", methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 def get_product_reviews():
     if request.method == 'GET':
         query = '''
@@ -66,7 +76,12 @@ def get_product_reviews():
                 GROUP BY (cms_id);
                 '''
         result = execute_query(query)
-        return json.dumps(result)
+        resp = make_response(json.dumps(result))
+        resp.headers.add('Access-Control-Allow-Headers', '*')
+
+        return resp
+    
+
     elif request.method == 'POST':
         query = '''
                 INSERT INTO reviews (cms_id, user_token, review_score)
@@ -78,7 +93,9 @@ def get_product_reviews():
 
         execute_query_commit(query, vars)
 
-        return Response("Review successful", 201)
+        resp = Response("Review successful", 201)
+        resp.headers.add('Access-Control-Allow-Headers', '*')
+        return resp
 
 
 if __name__ == "__main__":
