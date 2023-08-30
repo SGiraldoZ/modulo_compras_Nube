@@ -24,7 +24,7 @@ def customer_purchases(user_id):
         return json.dumps(result)
     
 @app.route("/customer/<user_id>/reviews", methods=['GET'])
-def customer_purchases(user_id):
+def customer_reviews(user_id):
     if request.method == 'GET':
         query = '''
                 SELECT user_token, cms_id, review_score FROM reviews WHERE user_token = %s;
