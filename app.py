@@ -28,9 +28,9 @@ def customer_purchases(user_id):
         result = execute_query(query, vars)
 
         resp = make_response(json.dumps(result))
-        resp.headers.add('Access-Control-Allow-Headers', '*')
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        resp.headers.add('Access-Control-Allow-Methods', '*')
+        # resp.headers.add('Access-Control-Allow-Headers', '*')
+        # resp.headers.add('Access-Control-Allow-Origin', '*')
+        # resp.headers.add('Access-Control-Allow-Methods', '*')
 
         return resp
     
@@ -45,9 +45,9 @@ def customer_reviews(user_id):
         result = execute_query(query, vars)
 
         resp = make_response(json.dumps(result))
-        resp.headers.add('Access-Control-Allow-Headers', '*')
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        resp.headers.add('Access-Control-Allow-Methods', '*')
+        # resp.headers.add('Access-Control-Allow-Headers', '*')
+        # resp.headers.add('Access-Control-Allow-Origin', '*')
+        # resp.headers.add('Access-Control-Allow-Methods', '*')
 
         return resp
 
@@ -66,9 +66,9 @@ def post_purchase():
         execute_query_commit(query, vars)
 
         resp = Response("Purchase successful", 201)
-        resp.headers.add('Access-Control-Allow-Headers', '*')
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        resp.headers.add('Access-Control-Allow-Methods', '*')
+        # resp.headers.add('Access-Control-Allow-Headers', '*')
+        # resp.headers.add('Access-Control-Allow-Origin', '*')
+        # resp.headers.add('Access-Control-Allow-Methods', '*')
         return resp
         
 
@@ -83,9 +83,9 @@ def get_product_reviews():
                 '''
         result = execute_query(query)
         resp = make_response(json.dumps(result))
-        resp.headers.add('Access-Control-Allow-Headers', '*')
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        resp.headers.add('Access-Control-Allow-Methods', '*')
+        # resp.headers.add('Access-Control-Allow-Headers', '*')
+        # resp.headers.add('Access-Control-Allow-Origin', '*')
+        # resp.headers.add('Access-Control-Allow-Methods', '*')
 
         return resp
     
@@ -102,9 +102,9 @@ def get_product_reviews():
         execute_query_commit(query, vars)
 
         resp = Response("Review successful", 201)
-        resp.headers.add('Access-Control-Allow-Headers', '*')
-        resp.headers.add('Access-Control-Allow-Origin', '*')
-        resp.headers.add('Access-Control-Allow-Methods', '*')
+        # resp.headers.add('Access-Control-Allow-Headers', '*')
+        # resp.headers.add('Access-Control-Allow-Origin', '*')
+        # resp.headers.add('Access-Control-Allow-Methods', '*')
         return resp
 
 
