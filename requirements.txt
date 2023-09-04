@@ -2,3 +2,4 @@ flask==2.2.2
 python-dotenv==0.21.0
 psycopg2-binary
 flask_cors==3.0.10
+mysql-connector-python==8.1.0

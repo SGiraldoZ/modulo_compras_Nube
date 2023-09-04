@@ -1,4 +1,5 @@
 import psycopg2, psycopg2.extras
+import mysql.connector
 import os
 from dotenv import load_dotenv
 
@@ -7,13 +8,22 @@ username = os.getenv('DB_USERNAME')
 password = os.getenv('DB_PASSWORD')
 host = os.getenv('DB_URL')
 port=os.getenv('DB_PORT')
+database = os.getenv('DB_NAME')
 
 
 def connect():
 
     # Create a connection object.
-    conn = psycopg2.connect(
-        database="udemy",
+    # conn = psycopg2.connect(
+    #     database=database,
+    #     user=username,
+    #     password=password,
+    #     host=host,
+    #     port=port,
+    # )
+
+    conn = mysql.connector.connect(
+        database=database,
         user=username,
         password=password,
         host=host,
@@ -24,7 +34,8 @@ def connect():
 
 def execute_query(query, vars=None):
     conn = connect()
-    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    #cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cur = conn.cursor(dictionary=True)
     cur.execute(query, vars=vars)
 
     # Fetch the results.
