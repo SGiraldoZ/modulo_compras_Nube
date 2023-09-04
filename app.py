@@ -92,7 +92,7 @@ def get_product_reviews():
 
     elif request.method == 'POST':
         query = '''
-                INSERT INTO reviews (cms_id, user_token, review_score)
+                INSERT INTO Reviews (cms_id, user_token, review_score)
                 VALUES (%s, %s, %s)
                 '''
         json_body = request.get_json()
