@@ -36,7 +36,8 @@ def execute_query(query, vars=None):
     conn = connect()
     #cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
     cur = conn.cursor(dictionary=True)
-    cur.execute(query, vars=vars)
+    # cur.execute(query, vars=vars)
+    cur.execute(query, vars)
 
     # Fetch the results.
     rows = cur.fetchall()
@@ -46,8 +47,9 @@ def execute_query(query, vars=None):
 
 def execute_query_commit(query, vars):
     conn = connect()
-    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
-    cur.execute(query, vars=vars)
+    # cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cur = conn.cursor(dictionary=True)
+    cur.execute(query, vars)
         
     conn.commit()
     conn.close()
