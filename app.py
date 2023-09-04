@@ -78,7 +78,7 @@ def get_product_reviews():
     if request.method == 'GET':
         query = '''
                 SELECT cms_id AS course_cms_id, AVG(review_score) AS review_score
-                FROM reviews
+                FROM Reviews
                 GROUP BY (cms_id);
                 '''
         result = execute_query(query)
