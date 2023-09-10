@@ -10,7 +10,7 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 
 app.config['CORS_SUPPORTS_CREDENTIALS'] = True
-CORS(app,  support_credentials=True, expose_headers=['Content-Type'])
+CORS(app,  support_credentials=True)
 
 @app.route("/")
 @cross_origin(supports_credentials=True)
@@ -27,7 +27,7 @@ def customer_purchases(user_id):
         vars = (user_id,)
         result = execute_query(query, vars)
 
-        resp = make_response(json.dumps(result))
+        resp = make_response(json.dumps(result), mimetype='text/html')
         # resp.headers.add('Access-Control-Allow-Headers', '*')
         # resp.headers.add('Access-Control-Allow-Origin', '*')
         # resp.headers.add('Access-Control-Allow-Methods', '*')
@@ -44,7 +44,7 @@ def customer_reviews(user_id):
         vars = (user_id,)
         result = execute_query(query, vars)
 
-        resp = make_response(json.dumps(result))
+        resp = make_response(json.dumps(result), mimetype='text/html')
         # resp.headers.add('Access-Control-Allow-Headers', '*')
         # resp.headers.add('Access-Control-Allow-Origin', '*')
         # resp.headers.add('Access-Control-Allow-Methods', '*')
@@ -82,7 +82,7 @@ def get_product_reviews():
                 GROUP BY (cms_id);
                 '''
         result = execute_query(query)
-        resp = make_response(json.dumps(result))
+        resp = make_response(json.dumps(result), mimetype='text/html')
         # resp.headers.add('Access-Control-Allow-Headers', '*')
         # resp.headers.add('Access-Control-Allow-Origin', '*')
         # resp.headers.add('Access-Control-Allow-Methods', '*')
