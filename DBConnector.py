@@ -3,15 +3,13 @@ import mysql.connector
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-username = os.getenv('DB_USERNAME')
-password = os.getenv('DB_PASSWORD')
-host = os.getenv('DB_URL')
-port=os.getenv('DB_PORT')
-database = os.getenv('DB_NAME')
-
-
 def connect():
+    load_dotenv()
+    username = os.getenv('DB_USERNAME')
+    password = os.getenv('DB_PASSWORD')
+    host = os.getenv('DB_URL')
+    port=os.getenv('DB_PORT')
+    database = os.getenv('DB_NAME')
 
     #Create a connection object.
     conn = psycopg2.connect(
