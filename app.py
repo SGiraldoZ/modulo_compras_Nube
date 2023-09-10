@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, Response, make_response
+from flask import Flask, request, redirect, Response, Response
 import flask
 from dotenv import load_dotenv
 import os
@@ -27,7 +27,7 @@ def customer_purchases(user_id):
         vars = (user_id,)
         result = execute_query(query, vars)
 
-        resp = make_response(json.dumps(result), mimetype='text/html')
+        resp = Response(json.dumps(result), mimetype='text/html')
         # resp.headers.add('Access-Control-Allow-Headers', '*')
         # resp.headers.add('Access-Control-Allow-Origin', '*')
         # resp.headers.add('Access-Control-Allow-Methods', '*')
@@ -44,7 +44,7 @@ def customer_reviews(user_id):
         vars = (user_id,)
         result = execute_query(query, vars)
 
-        resp = make_response(json.dumps(result), mimetype='text/html')
+        resp = Response(json.dumps(result), mimetype='text/html')
         # resp.headers.add('Access-Control-Allow-Headers', '*')
         # resp.headers.add('Access-Control-Allow-Origin', '*')
         # resp.headers.add('Access-Control-Allow-Methods', '*')
@@ -82,7 +82,7 @@ def get_product_reviews():
                 GROUP BY (cms_id);
                 '''
         result = execute_query(query)
-        resp = make_response(json.dumps(result), mimetype='text/html')
+        resp = Response(json.dumps(result), mimetype='text/html')
         # resp.headers.add('Access-Control-Allow-Headers', '*')
         # resp.headers.add('Access-Control-Allow-Origin', '*')
         # resp.headers.add('Access-Control-Allow-Methods', '*')
