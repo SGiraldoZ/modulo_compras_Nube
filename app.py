@@ -10,7 +10,7 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 
 app.config['CORS_SUPPORTS_CREDENTIALS'] = True
-CORS(app,  support_credentials=True)
+CORS(app,  support_credentials=True, expose_headers=['Content-Type'])
 
 @app.route("/")
 @cross_origin(supports_credentials=True)
